@@ -16,8 +16,8 @@
         "method": "post",
         "upload": true,
         "swaggerDoc": "",
-        "x": 200,
-        "y": 160,
+        "x": 120,
+        "y": 140,
         "wires": [
             [
                 "99c1579d785ed00e"
@@ -35,8 +35,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 450,
-        "y": 160,
+        "x": 370,
+        "y": 140,
         "wires": [
             [
                 "0ed45a84dfeffa17"
@@ -50,8 +50,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 1070,
-        "y": 160,
+        "x": 990,
+        "y": 140,
         "wires": []
     },
     {
@@ -65,8 +65,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 880,
-        "y": 160,
+        "x": 800,
+        "y": 140,
         "wires": [
             [
                 "f322b07cef60d4ac"
@@ -82,8 +82,8 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 160,
-        "y": 80,
+        "x": 80,
+        "y": 60,
         "wires": [
             [
                 "03ba76c2e2d50a51"
@@ -99,8 +99,8 @@
         "headers": {
             "content-type": "text/css"
         },
-        "x": 490,
-        "y": 80,
+        "x": 410,
+        "y": 60,
         "wires": []
     },
     {
@@ -114,8 +114,8 @@
         "syntax": "mustache",
         "template": "::-webkit-scrollbar {\n  width: 0.1px;\n  scrollbar-color: #9bc7f38b;\n}\n.main_container {\n  top:0 !important;\n  left: 0 !important; \n  height: 100vh !important;\n  width: 100% !important;\n  background-image: linear-gradient(180deg, #ffffff 25%, #EDEBE1 100%) !important;\n\n}\n\n.main_container>div>div>div>div>div>div>div>div>div>div {\n  height:100% !important; \n}\n.form_container, .answer_container   {\n    top: 50% !important;\n    transform: translate(0,-50%)!important;\n    max-height: 85vh !important;\n}\n.chat>div>div>div>div, .chat>div>div>div>div>div{\n  background-color: transparent !important;\n}\n.chat form, .chat form textarea {\n  border-radius: 4px !important;\n   background-color:#D97757 !important;\n  color: rgb(255 255 255);\n} \ndiv[data-cy=\"overlay-comments-wrapper\"]>div>div>div>div {\ncolor: rgb(37, 37, 37);\nbackground-color:transparent !important;\n}\n.bp3-input, .select-button {\n    border-radius: 5px !important;\n    color: #231F20 !important;\n}\n.select-button span {\n    color: inherit !important;\n}\n\n.generate_btn span{\n    color: #FFFFFF !important;\n}\n.answer_container>div {\n  border-radius: 3px;\n  box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 4px 3px !important;\n}\n/* .answer_container>div>div>div>div>div>div>div {\n  border-radius: 10px;\n  padding: 7px !important;\n  \n} */\n.label-container {\n  justify-content: space-between !important;\n}\n\n",
         "output": "str",
-        "x": 330,
-        "y": 80,
+        "x": 250,
+        "y": 60,
         "wires": [
             [
                 "bee07027d58c6068"
@@ -138,8 +138,8 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 670,
-        "y": 160,
+        "x": 590,
+        "y": 140,
         "wires": [
             [
                 "9308a3d13952f1a4"
