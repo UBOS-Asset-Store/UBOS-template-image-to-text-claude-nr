@@ -1,4 +1,4 @@
-UBOS-template-talk-with-claude-nr
+UBOS-template-image-to-text-with-claude-nr
 =================================
 
 ### About
