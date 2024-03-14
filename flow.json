@@ -1,0 +1,149 @@
+[
+    {
+        "id": "2c43dbc45da18517",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "7b8e45decdc7489f",
+        "type": "http in",
+        "z": "2c43dbc45da18517",
+        "name": "",
+        "url": "/describeImage",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 160,
+        "wires": [
+            [
+                "99c1579d785ed00e"
+            ]
+        ]
+    },
+    {
+        "id": "99c1579d785ed00e",
+        "type": "function",
+        "z": "2c43dbc45da18517",
+        "name": "make request to Claude",
+        "func": "msg.headers = {\n    \"Content-Type\": \"application/json\",\n    \"x-api-key\": msg.payload.key,\n    \"anthropic-version\": \"2023-06-01\"\n}\n\nlet base64 = Buffer.from(msg.req.files[0].buffer).toString('base64');\n\nmsg.payload = {\n    model: msg.payload.model,\n    max_tokens: 2500,\n    messages: [{\n        \"role\": \"user\",\n        \"content\": [\n            {\n                \"type\": \"image\",\n                \"source\": {\n                    \"type\": \"base64\",\n                    \"media_type\": msg.req.files[0].mimetype,\n                    \"data\": base64,\n                }\n            },\n            { \"type\": \"text\", \"text\": \"What is in this image?\" }\n        ]\n    }]\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 160,
+        "wires": [
+            [
+                "0ed45a84dfeffa17"
+            ]
+        ]
+    },
+    {
+        "id": "f322b07cef60d4ac",
+        "type": "http response",
+        "z": "2c43dbc45da18517",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1070,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "9308a3d13952f1a4",
+        "type": "function",
+        "z": "2c43dbc45da18517",
+        "name": "prepare response to ui",
+        "func": "if (msg.statusCode === 200) {\n    const answers = msg.payload.content[0].text\n    msg.payload = answers\n}\nelse {\n    msg.payload = `Ooops, something went wrong!🥲 ${msg.payload.error.message}`\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 160,
+        "wires": [
+            [
+                "f322b07cef60d4ac"
+            ]
+        ]
+    },
+    {
+        "id": "9f20f1deef775ad8",
+        "type": "http in",
+        "z": "2c43dbc45da18517",
+        "name": "",
+        "url": "/css",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 80,
+        "wires": [
+            [
+                "03ba76c2e2d50a51"
+            ]
+        ]
+    },
+    {
+        "id": "bee07027d58c6068",
+        "type": "http response",
+        "z": "2c43dbc45da18517",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "text/css"
+        },
+        "x": 490,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "03ba76c2e2d50a51",
+        "type": "template",
+        "z": "2c43dbc45da18517",
+        "name": "customCSS",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "css",
+        "syntax": "mustache",
+        "template": "::-webkit-scrollbar {\n  width: 0.1px;\n  scrollbar-color: #9bc7f38b;\n}\n.main_container {\n  top:0 !important;\n  left: 0 !important; \n  height: 100vh !important;\n  width: 100% !important;\n  background-image: linear-gradient(180deg, #ffffff 25%, #EDEBE1 100%) !important;\n\n}\n\n.main_container>div>div>div>div>div>div>div>div>div>div {\n  height:100% !important; \n}\n.form_container, .answer_container   {\n    top: 50% !important;\n    transform: translate(0,-50%)!important;\n    max-height: 85vh !important;\n}\n.chat>div>div>div>div, .chat>div>div>div>div>div{\n  background-color: transparent !important;\n}\n.chat form, .chat form textarea {\n  border-radius: 4px !important;\n   background-color:#D97757 !important;\n  color: rgb(255 255 255);\n} \ndiv[data-cy=\"overlay-comments-wrapper\"]>div>div>div>div {\ncolor: rgb(37, 37, 37);\nbackground-color:transparent !important;\n}\n.bp3-input, .select-button {\n    border-radius: 5px !important;\n    color: #231F20 !important;\n}\n.select-button span {\n    color: inherit !important;\n}\n\n.generate_btn span{\n    color: #FFFFFF !important;\n}\n.answer_container>div {\n  border-radius: 3px;\n  box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 4px 3px !important;\n}\n/* .answer_container>div>div>div>div>div>div>div {\n  border-radius: 10px;\n  padding: 7px !important;\n  \n} */\n.label-container {\n  justify-content: space-between !important;\n}\n\n",
+        "output": "str",
+        "x": 330,
+        "y": 80,
+        "wires": [
+            [
+                "bee07027d58c6068"
+            ]
+        ]
+    },
+    {
+        "id": "0ed45a84dfeffa17",
+        "type": "http request",
+        "z": "2c43dbc45da18517",
+        "name": "to anthropic",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "body",
+        "url": "https://api.anthropic.com/v1/messages",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 670,
+        "y": 160,
+        "wires": [
+            [
+                "9308a3d13952f1a4"
+            ]
+        ]
+    }
+]
